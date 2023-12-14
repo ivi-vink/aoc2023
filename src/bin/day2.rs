@@ -1,8 +1,20 @@
 #![feature(test)]
+use std::str::FromStr;
 use std::error::Error;
 
 const COLORS: [&str; 3] = ["red", "green", "blue"];
 const AMOUNT: [u32; 3] = [12, 13, 14];
+
+struct HelloWorld {
+    msg: String,
+}
+
+impl FromStr for HelloWorld {
+    type Err = std::convert::Infallible;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        Ok(HelloWorld { msg: String::from(s), })
+    }
+}
 
 // NOTE: probably should just panic, filter_mapping doesn't make much sense if you need the input to be correct.
 fn main() -> Result<(), Box<dyn Error>> {
@@ -60,6 +72,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         })
         .sum();
     dbg!(part2);
+
+    let v: HelloWorld = "hi".parse()?;
+    println!("msg from impl: {}", v.msg);
 
     Ok(())
 }
