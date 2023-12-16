@@ -1,6 +1,6 @@
 #![feature(test)]
-use std::str::FromStr;
 use std::error::Error;
+use std::str::FromStr;
 
 const COLORS: [&str; 3] = ["red", "green", "blue"];
 const AMOUNT: [u32; 3] = [12, 13, 14];
@@ -12,7 +12,9 @@ struct HelloWorld {
 impl FromStr for HelloWorld {
     type Err = std::convert::Infallible;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(HelloWorld { msg: String::from(s), })
+        Ok(HelloWorld {
+            msg: String::from(s),
+        })
     }
 }
 
